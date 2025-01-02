@@ -18,6 +18,6 @@ jobs:
           extra-conf: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://cache.nixos.org/
-      - run: "nix profile installgithub:juspay/omnix"
       - run: cachix use hyprflake
+      - run: "nix profile installgithub:juspay/omnix"
       - run: om ci | cachix push hyprflake
