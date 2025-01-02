@@ -7,8 +7,7 @@ doc:
 
 # Auto-format the source tree
 fmt:
-    treefmt --allow-missing-formatter --no-cache
-
+    treefmt --allow-missing-formatter --no-cache --fail-on-change
 
 # Run 'cargo run' on the project
 run *ARGS:
