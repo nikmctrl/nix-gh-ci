@@ -11,7 +11,7 @@
 
     # Dev tools
     treefmt-nix.url = "github:numtide/treefmt-nix";
-
+    flake-root.url = "github:srid/flake-root";
     omnix.url = "github:juspay/omnix";
   };
 

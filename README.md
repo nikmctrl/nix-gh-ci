@@ -6,11 +6,13 @@ A template Rust project with fully functional and no-frills Nix support, as well
 ## Usage
 
 You can use [omnix](https://omnix.page/om/init.html)[^omnix] to initialize this template:
+
 ```
 nix --accept-flake-config run github:juspay/omnix -- init github:srid/rust-nix-gh-ci-example -o ~/my-rust-project
 ```
 
 [^omnix]: If initializing manually, make sure to:
+
     - Change `name` in Cargo.toml.
     - Run `cargo generate-lockfile` in the nix shelld
 
@@ -34,11 +36,3 @@ nix build
 ```
 
 We also provide a [`justfile`](https://just.systems/) for Makefile'esque commands to be run inside of the devShell.
-
-## Discussion
-
-- [Zulip](https://nixos.zulipchat.com/#narrow/stream/413950-nix)
-
-## See Also
-
-- [nixos.wiki: Packaging Rust projects with nix](https://nixos.wiki/wiki/Rust#Packaging_Rust_projects_with_nix)

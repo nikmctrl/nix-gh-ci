@@ -1,15 +1,13 @@
+default:
+    @just --list
+
 doc:
     nix build .#cargo-doc-live
     nix run .#cargo-doc-live
 
-
-default:
-    @just --list
-
 # Auto-format the source tree
 fmt:
-    treefmt
-
+    treefmt --allow-missing-formatter --no-cache --fail-on-change
 
 # Run 'cargo run' on the project
 run *ARGS:
