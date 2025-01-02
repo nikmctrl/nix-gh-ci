@@ -1,10 +1,9 @@
+default:
+    @just --list
+
 doc:
     nix build .#cargo-doc-live
     nix run .#cargo-doc-live
-
-
-default:
-    @just --list
 
 # Auto-format the source tree
 fmt:

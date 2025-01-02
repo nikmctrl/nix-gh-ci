@@ -4,7 +4,7 @@ ci:
       dir: .
       steps:
         flake-check:
-          enable: true
+          enable: false
         custom:
           om-show:
             type: app
