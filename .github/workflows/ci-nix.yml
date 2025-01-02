@@ -19,5 +19,5 @@ jobs:
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://cache.nixos.org/
       - run: "nix-shell -p cachix --run 'cachix use hyprflake'"
-      - run: "nix run github:juspay/omnix --accept-flake-config ci | nix-shell -p cachix --run \"cachix push hyprflake\""
+      - run: 'nix run github:juspay/omnix --accept-flake-config ci | nix-shell -p cachix --run "cachix push hyprflake"'
       - run: just fmt
