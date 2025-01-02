@@ -16,9 +16,10 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
-            trusted-public-keys =  cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            substituters =  https://cache.nixos.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://cache.nixos.org/
       - uses: yaxitech/nix-install-pkgs-action@v3
         with:
           packages: "github:juspay/omnix, cachix"
+      - run: cachix use hyprflake
       - run: om ci | cachix push hyprflake
