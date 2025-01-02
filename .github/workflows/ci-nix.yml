@@ -7,6 +7,7 @@ on:
       - master
   pull_request:
   workflow_run:
+    workflows: ci-nix.yml
 jobs:
   build:
     runs-on: ${{ matrix.os }}
