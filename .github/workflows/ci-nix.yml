@@ -20,5 +20,5 @@ jobs:
             substituters =  https://cache.nixos.org/
       - uses: yaxitech/nix-install-pkgs-action@v3
         with:
-          packages: "github:juspay/omnix"
-      - run: om ci
+          packages: "github:juspay/omnix, cachix"
+      - run: om ci | cachix push hyprflake
