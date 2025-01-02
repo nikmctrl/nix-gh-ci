@@ -11,6 +11,8 @@
 
     # Dev tools
     treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    omnix.url = "github:juspay/omnix";
   };
 
   outputs = inputs:
