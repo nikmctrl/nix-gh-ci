@@ -8,10 +8,12 @@
     # cf. https://nixos.asia/en/treefmt
     treefmt.config = {
       projectRootFile = "flake.nix";
+      
       programs = {
         nixpkgs-fmt.enable = true;
         rustfmt.enable = true;
         shfmt.enable = true;
+        prettier.enable = true;
       };
     };
   };

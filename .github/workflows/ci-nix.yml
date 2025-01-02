@@ -21,3 +21,4 @@ jobs:
       - run: "nix-shell -p cachix --run 'cachix use hyprflake'"
       - run: "nix profile install github:juspay/omnix"
       - run: om ci | cachix push hyprflake
+      - run: just fmt
