@@ -12,7 +12,6 @@
         nixpkgs-fmt.enable = true;
         rustfmt.enable = true;
         shfmt.enable = true;
-
       };
     };
   };
