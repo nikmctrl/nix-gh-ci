@@ -22,4 +22,4 @@ jobs:
       - run: "nix profile install --accept-flake-config github:juspay/omnix nixpkgs#cachix"
       - run: "cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: "om ci | cachix push hyprflake"
-      - run: just fmt
+      - run: nix flake check 
