@@ -1,13 +1,11 @@
 name: "Nix Omnix CI"
 
 on:
-  # Run only when pushing to master branch, and making PRs
   push:
     branches:
       - master
   pull_request:
   workflow_run:
-    workflows: ci-nix.yml
 jobs:
   build:
     runs-on: ${{ matrix.os }}
