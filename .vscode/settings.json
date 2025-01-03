@@ -1,6 +1,9 @@
 {
   "editor.formatOnSave": true,
-  "rust-analyzer.files.excludeDirs": [".direnv"]
+  "rust-analyzer.files.excludeDirs": [
+    ".direnv"
+  ],
+  "nixEnvSelector.nixFile": "${workspaceFolder}/flake.nix"
   // https://twitter.com/sridca/status/1674947342607216641
   // "editor.inlayHints.enabled": "offUnlessPressed",
 }
