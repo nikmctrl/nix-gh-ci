@@ -10,8 +10,8 @@ _:
       packages = [
         pkgs.just
         pkgs.nixd # Nix language server
-        pkgs.cargo-watch
-        # config.process-compose.cargo-doc-live.outputs.package
+        # pkgs.cargo-watch
+        # config.process-compose.cargo-doc-live.outputs.cargo-doc-live
         pkgs.cachix
       ];
     };
