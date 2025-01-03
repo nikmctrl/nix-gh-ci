@@ -14,7 +14,15 @@
         nixpkgs-fmt.enable = true;
         rustfmt.enable = true;
         shfmt.enable = true;
+        shellcheck.enable = true;
         prettier.enable = true;
+        jsonfmt.enable = true;
+        taplo.enable = true;
+        toml-sort.enable = true;
+        yamlfmt.enable = true;
+        actionlint.enable = true;
+        deadnix.enable = true;
+        statix.enable = true;
       };
     };
   };
