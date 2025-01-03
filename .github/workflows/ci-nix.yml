@@ -13,12 +13,19 @@ jobs:
         os: [ubuntu-22.04, macos-14]
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hyprflake.cachix.org-1:7fpoBMQuosbaoqxQ5bsxR2GPVQ3mjBp7dfziXc4e+hM=
             substituters = https://cache.nixos.org/ https://hyprflake.cachix.org
-      - run: "nix profile install --accept-flake-config github:juspay/omnix nixpkgs#cachix"
-      - run: "cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: "om ci | cachix push hyprflake"
-      - run: nix flake check
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: DeterminateSystems/flake-checker-action@main
+      - name: Install Cachix and Omnix
+        run: "nix profile install --accept-flake-config github:juspay/omnix nixpkgs#cachix"
+      - name: Authenticate Cachix
+        run: "cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Build all flake outputs and push to Cachix
+        run: "om ci | cachix push hyprflake"
+      - name: Check flake
+        run: "nix flake check"
