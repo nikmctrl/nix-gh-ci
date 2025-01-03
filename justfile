@@ -22,3 +22,6 @@ clippy:
 
 test:
     cargo test
+
+bench *ARGS:
+    bencher run --project nix-ci-bench bencher {{ARGS}}
