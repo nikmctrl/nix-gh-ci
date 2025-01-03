@@ -47,7 +47,6 @@ health:
         - https://nix-community.cachix.org
     direnv:
       required: true
-
 develop:
   default:
     readme: |

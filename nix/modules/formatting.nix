@@ -4,7 +4,7 @@
     inputs.treefmt-nix.flakeModule
     inputs.flake-root.flakeModule
   ];
-  perSystem = { config, self', pkgs, lib, ... }: {
+  perSystem = { config, ... }: {
     # Add your auto-formatters here.
     # cf. https://nixos.asia/en/treefmt
     treefmt.config = {
@@ -14,7 +14,6 @@
         nixpkgs-fmt.enable = true;
         rustfmt.enable = true;
         shfmt.enable = true;
-        shellcheck.enable = true;
         prettier.enable = true;
         jsonfmt.enable = true;
         taplo.enable = true;
@@ -24,6 +23,7 @@
         deadnix.enable = true;
         statix.enable = true;
       };
+
     };
   };
 }
