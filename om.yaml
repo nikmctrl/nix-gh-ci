@@ -2,40 +2,37 @@ ci:
   default:
     omnix:
       dir: .
-      steps:
-        flake-check:
-          enable: false
-        custom:
-          om-show:
-            type: app
-            args:
-              - show
-              - .
-          #   binary-size-is-small:
-          #     type: app
-          #     name: check-closure-size
-          #     systems:
-          #       - x86_64-linux
-          #       - aarch64-darwin
-          # omnix-source-is-buildable:
-          #   type: app
-          #   name: omnix-source-is-buildable
-          cargo-test:
-            type: devshell
-            command:
-              - just
-              - test
-            systems:
-              - x86_64-linux
-              - aarch64-darwin
-          cargo-clippy:
-            type: devshell
-            command:
-              - just
-              - clippy
-            systems:
-              - x86_64-linux
-              - aarch64-darwin
+      # custom:
+      #   om-show:
+      #     type: app
+      #     args:
+      #       - show
+      #       - .
+      #   #   binary-size-is-small:
+      #   #     type: app
+      #   #     name: check-closure-size
+      #   #     systems:
+      #   #       - x86_64-linux
+      #   #       - aarch64-darwin
+      #   # omnix-source-is-buildable:
+      #   #   type: app
+      #   #   name: omnix-source-is-buildable
+      #   cargo-test:
+      #     type: devshell
+      #     command:
+      #       - just
+      #       - test
+      #     systems:
+      #       - x86_64-linux
+      #       - aarch64-darwin
+      #   cargo-clippy:
+      #     type: devshell
+      #     command:
+      #       - just
+      #       - clippy
+      #     systems:
+      #       - x86_64-linux
+      #       - aarch64-darwin
 health:
   default:
     nix-version:
