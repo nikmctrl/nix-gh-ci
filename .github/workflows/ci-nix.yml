@@ -2,10 +2,9 @@ name: "Nix Omnix CI"
 
 on:
   push:
-    branches:
-      - master
   pull_request:
-  workflow_run:
+  
+      
 jobs:
   build:
     runs-on: ${{ matrix.os }}
