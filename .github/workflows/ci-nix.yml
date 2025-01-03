@@ -27,7 +27,7 @@ jobs:
       - name: Build all flake outputs and push to Cachix
         run: "om ci | cachix push hyprflake"
       - name: Automatically update flake.lock
-        uses: DeterminateSystems/update-flake-lock@latest
+        uses: DeterminateSystems/update-flake-lock@v24
         with:
           pr-title: "Update flake.lock"
           pr-labels: "dependencies"
