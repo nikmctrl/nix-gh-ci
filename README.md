@@ -1,3 +1,5 @@
+[![Nix Omnix CI](https://github.com/nikmctrl/nix-gh-ci/actions/workflows/ci-nix.yml/badge.svg?branch=main)](https://github.com/nikmctrl/nix-gh-ci/actions/workflows/ci-nix.yml)
+
 A template Rust project with fully functional and no-frills Nix support, as well as builtin VSCode configuration to get IDE experience without any manual setup (just [install direnv](https://nixos.asia/en/direnv), open in VSCode and accept the suggestions). It uses [crane](https://crane.dev/), via [rust-flake](https://github.com/juspay/rust-flake).
 
 > [!NOTE]
