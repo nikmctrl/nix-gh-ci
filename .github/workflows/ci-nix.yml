@@ -9,13 +9,6 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          kvm: false
-          extra-conf: |
-            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hyprflake.cachix.org-1:7fpoBMQuosbaoqxQ5bsxR2GPVQ3mjBp7dfziXc4e+hM=
-            substituters = https://cache.nixos.org/ https://hyprflake.cachix.org
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: DeterminateSystems/flake-checker-action@main
       - name: Install Cachix and Omnix
