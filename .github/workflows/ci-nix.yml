@@ -6,10 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-22.04, macos-14]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - name: Install Nix
@@ -27,7 +24,7 @@ jobs:
       - name: Build all flake outputs and push to Cachix
         run: "om ci | cachix push hyprflake"
   formatted:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     strategy:
       fail-fast: true
     steps:
