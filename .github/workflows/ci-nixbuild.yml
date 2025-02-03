@@ -11,22 +11,13 @@ jobs:
       fail-fast: true
     steps:
       - uses: actions/checkout@v4
-      - run: |
-            echo "${{ secrets.SSH_KEY }}" > ~/ssh_key
-            chmod 0700 ~/ssh_key
-            ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@icedancer.viiol.xyz echo hi
-            whoami
-        name: "Add ssh-key"
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
-          extra-conf: |
-            builders-use-substitutes = true
-            require-sigs = false
-            builders = ssh://vii@eu.nixbuild.net x86_64-linux ~/ssh_key 100 1 benchmark,big-parallel
-            substituters = https://cache.nixos.org/ https://hyprflake.cachix.org/ ssh://eu.nixbuild.net https://om.cachix.org
-            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hyprflake.cachix.org-1:7fpoBMQuosbaoqxQ5bsxR2GPVQ3mjBp7dfziXc4e+hM= nixbuild.net/bob-1:8tJU22/XxyINhP+wM65gwSIlg0rrQrmWhFf5+8u8F/s= om.cachix.org-1:ifal/RLZJKN4sbpScyPGqJ2+appCslzu7ZZF/C01f2Q=
-            trusted-users = vii root
+      - uses: nixbuild/nixbuild-action@v19
+        with:
+            nixbuild_token: ${{ secrets.NIXBUILD_KEY }}
+            generate_summary_for: "job"
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: DeterminateSystems/flake-checker-action@main
       - name: Install Cachix and Omnix
