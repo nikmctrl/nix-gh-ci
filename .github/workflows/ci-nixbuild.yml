@@ -16,6 +16,8 @@ jobs:
             chmod 0700 ssh_key
             ssh-add ./ssh_key
             ssh root@icedancer.viiol.xyz echo hi
+            cat "~/.ssh/ssh_key"
+        name: "Add ssh-key"
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
