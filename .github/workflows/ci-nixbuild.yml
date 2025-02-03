@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-            cat ${{ secrets.SSH_KEY }} > ssh_key
+            echo "${{ secrets.SSH_KEY }}" > ssh_key
             chmod 0700 ssh_key
             ssh-add ./ssh_key
             ssh root@icedancer.viiol.xyz echo hi
