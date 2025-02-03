@@ -13,10 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
             echo "${{ secrets.SSH_KEY }}" > ssh_key
-            chmod 0700 ssh_key
-            ssh-add ./ssh_key
-            ssh root@icedancer.viiol.xyz echo hi
-            cat "~/.ssh/ssh_key"
+            ssh -i ./ssh_key root@icedancer.viiol.xyz echo hi
         name: "Add ssh-key"
       - uses: DeterminateSystems/nix-installer-action@main
         with:
