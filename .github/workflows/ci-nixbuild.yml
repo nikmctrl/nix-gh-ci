@@ -1,4 +1,4 @@
-name: "Nix Omnix CI"
+name: "Nix Omnix CI (with nixbuild)"
 
 on:
   push:
@@ -6,11 +6,16 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted]
-    strategy:
-      fail-fast: true
+    runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: true
+      - uses: nixbuild/nixbuild-action@v19
+        with:
+          nixbuild_token: ${{ secrets.NIXBUILD_KEY }}
+          generate_summary_for: "job"
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: DeterminateSystems/flake-checker-action@main
       - name: Install Cachix and Omnix
