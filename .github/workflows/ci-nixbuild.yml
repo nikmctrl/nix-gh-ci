@@ -11,7 +11,7 @@ jobs:
       fail-fast: true
     steps:
       - uses: actions/checkout@v4
-      - run: "ssh --help"
+      - run: "ssh-agent"
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
