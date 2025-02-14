@@ -1,12 +1,12 @@
-name: "Nix Omnix CI (ssh)"
+name: "Nix Omnix CI (cachix deploy)"
 
 on:
   push:
-    branches: 
-      - main
+    # branches: 
+      # - main
   pull_request:
-    branches: 
-      - main
+    # branches: 
+      # - main
 
 env:
   SSH_LOCATION: /tmp/ssh_key
