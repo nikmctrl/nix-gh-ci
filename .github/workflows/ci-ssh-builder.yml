@@ -12,16 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-            echo "${{ secrets.SSH_KEY }}" > ${{ env.SSH_LOCATION }}
-            chmod 0700 ${{ env.SSH_LOCATION }}
-            ssh -i ${{ env.SSH_LOCATION }} -o StrictHostKeyChecking=no root@eversince.viiol.xyz echo "connected successfully"
+          echo "${{ secrets.SSH_KEY }}" > ${{ env.SSH_LOCATION }}
+          chmod 0700 ${{ env.SSH_LOCATION }}
+          ssh -i ${{ env.SSH_LOCATION }} -o StrictHostKeyChecking=no root@eversince.viiol.xyz echo "connected successfully"
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
           extra-conf: |
             builders = ssh://root@eversince.viiol.xyz x86_64-linux ${{ env.SSH_LOCATION }} 0 0
             builders-use-substitutes = true
-    #   - uses: DeterminateSystems/magic-nix-cache-action@main
+      #   - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: DeterminateSystems/flake-checker-action@main
       - name: Install Cachix and Omnix
         run: "nix profile install --accept-flake-config github:juspay/omnix nixpkgs#cachix"
