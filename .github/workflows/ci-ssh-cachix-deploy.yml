@@ -31,8 +31,13 @@ jobs:
     #   - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build Cachix deploy plan
         run: |
-          cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
-          nix build .#cachix-deploy
+          export CACHIX_ACTIVATE_TOKEN=${{ secrets.CACHIX_ACTIVATE_TOKEN }}
+          export CACHIX_AUTH_TOKEN=${{ secrets.CACHIX_AUTH_TOKEN }}
 
-          cachix deploy activate ./result
+          spec=$(nix build .#cachix-deploy --print-out-paths)
+          cachix push nikmctrl $spec
+          cachix deploy activate $spec
+          
+          
+          
           

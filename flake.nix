@@ -12,7 +12,7 @@
     crane.url = "github:ipetkov/crane";
   };
 
-  outputs = {nixpkgs, flake-utils, cachix-deploy-flake, treefmt-nix, flake-root, omnix, crane, ...}:
+  outputs = {self, nixpkgs, flake-utils, cachix-deploy-flake, treefmt-nix, flake-root, omnix, crane, ...}:
   flake-utils.lib.eachDefaultSystem (system:  
   let 
         pkgs = nixpkgs.legacyPackages.${system}; 
@@ -54,15 +54,18 @@
       in
       {
         packages.default = myCrate;
+
         checks = {
          inherit
            # Build the crate as part of `nix flake check` for convenience
            myCrate;
         };
 
+        packages.deps = cargoArtifacts;
+
         packages.cachix-deploy = cachix-deploy-lib.spec {
             agents = {
-              nikbook = pkgs.nano;
+              icedancer = myCrate;
             };
           };
       });
