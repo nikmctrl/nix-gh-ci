@@ -34,6 +34,7 @@ jobs:
           export CACHIX_ACTIVATE_TOKEN=${{ secrets.CACHIX_ACTIVATE_TOKEN }}
           export CACHIX_AUTH_TOKEN=${{ secrets.CACHIX_AUTH_TOKEN }}
 
+          nix build . --print-out-paths | cachix push nikmctrl
           spec=$(nix build .#cachix-deploy --print-out-paths)
           cachix push nikmctrl $spec
           cachix deploy activate $spec
