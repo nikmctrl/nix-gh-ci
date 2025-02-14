@@ -26,12 +26,13 @@ jobs:
           extra-conf: |
             builders = ssh://root@eversince.viiol.xyz x86_64-linux ${{ env.SSH_LOCATION }} 0 0
             builders-use-substitutes = true
-      - uses: nix profile install nixpkgs#cachix
+      - name: Install Cachix
+        run: nix profile install nixpkgs#cachix
     #   - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build Cachix deploy plan
         run: |
           cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
           nix build .#cachix-deploy
-          
+
           cachix deploy activate ./result
           
