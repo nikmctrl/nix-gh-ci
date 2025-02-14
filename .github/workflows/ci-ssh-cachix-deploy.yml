@@ -13,7 +13,7 @@ env:
   CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
 jobs:
   build-cachix-deploy:
-    runs-on: [macos-latest]
+    runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
       - run: |
