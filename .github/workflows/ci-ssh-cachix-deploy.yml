@@ -1,0 +1,37 @@
+name: "Nix Omnix CI (ssh)"
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+
+env:
+  SSH_LOCATION: /tmp/ssh_key
+  CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
+jobs:
+  build-cachix-deploy:
+    runs-on: [macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+            echo "${{ secrets.SSH_KEY }}" > ${{ env.SSH_LOCATION }}
+            chmod 0700 ${{ env.SSH_LOCATION }}
+            ssh -i ${{ env.SSH_LOCATION }} -o StrictHostKeyChecking=no root@eversince.viiol.xyz echo "connected successfully"
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: false
+          extra-conf: |
+            builders = ssh://root@eversince.viiol.xyz x86_64-linux ${{ env.SSH_LOCATION }} 0 0
+            builders-use-substitutes = true
+      - uses: nix profile install nixpkgs#cachix
+    #   - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build Cachix deploy plan
+        run: |
+          cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix build .#cachix-deploy
+          
+          cachix deploy activate ./result
+          
