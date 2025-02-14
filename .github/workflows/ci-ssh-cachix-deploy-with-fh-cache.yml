@@ -1,0 +1,52 @@
+name: "Nix Omnix CI (cachix deploy)"
+
+on:
+  push:
+    # branches: 
+      # - main
+  pull_request:
+    # branches: 
+      # - main
+
+env:
+  SSH_LOCATION: /tmp/ssh_key
+  CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
+jobs:
+  build-cachix-deploy:
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+            echo "${{ secrets.SSH_KEY }}" > ${{ env.SSH_LOCATION }}
+            chmod 0700 ${{ env.SSH_LOCATION }}
+            ssh -i ${{ env.SSH_LOCATION }} -o StrictHostKeyChecking=no root@eversince.viiol.xyz echo "connected successfully"
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: false
+          extra-conf: |
+            builders = ssh://root@eversince.viiol.xyz x86_64-linux ${{ env.SSH_LOCATION }} 0 0
+            builders-use-substitutes = true
+            substituters = https://cache.nixos.org/ https://cachix.cachix.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM=
+      - uses: DeterminateSystems/flakehub-cache-action@main
+      - name: Install Cachix
+        run: nix profile install github:cachix/cachix
+    #   - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build Cachix deploy plan
+        run: |
+          export CACHIX_ACTIVATE_TOKEN=${{ secrets.CACHIX_ACTIVATE_TOKEN }}
+          export CACHIX_AUTH_TOKEN=${{ secrets.CACHIX_AUTH_TOKEN }}
+
+          nix build .#deps --print-out-paths | cachix push nikmctrl
+
+          nix build . --print-out-paths | cachix push nikmctrl
+          spec=$(nix build .#cachix-deploy --print-out-paths)
+          cachix push nikmctrl $spec
+          cachix deploy activate $spec
+          
+          
+          
+          
