@@ -26,6 +26,8 @@ jobs:
           extra-conf: |
             builders = ssh://root@eversince.viiol.xyz x86_64-linux ${{ env.SSH_LOCATION }} 0 0
             builders-use-substitutes = true
+            substituters = https://cache.nixos.org/ https://cachix.cachix.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM=
       - name: Install Cachix
         run: nix profile install nixpkgs#cachix
     #   - uses: DeterminateSystems/magic-nix-cache-action@main
