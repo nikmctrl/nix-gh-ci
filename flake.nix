@@ -28,6 +28,7 @@
           buildInputs = with pkgs; [
             # Add extra build inputs here, etc.
             # openssl
+            curl
           ];
 
           nativeBuildInputs = with pkgs; [
